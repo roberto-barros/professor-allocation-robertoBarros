@@ -52,6 +52,13 @@ public class Course {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
+
+	public List<Allocation> getAllocations() {
+		return allocations;
+	}
+
+	public void setAllocations(List<Allocation> allocations) {
+		this.allocations = allocations;
+	}
 	
 }
