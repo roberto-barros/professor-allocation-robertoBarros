@@ -10,6 +10,8 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 public class Allocation {
@@ -21,7 +23,13 @@ public class Allocation {
 	@Enumerated(value = EnumType.STRING)
 	@Column(nullable = false, unique = false, length = 50)
 	private DayOfWeek dayOfWeek;
+	
+	@Temporal(value = TemporalType.TIME)
+	@Column(nullable = false, unique = false)
 	private Date start;
+	
+	@Temporal(value = TemporalType.TIME)
+	@Column(nullable = false, unique = false)
 	private Date end;
 
 	public Allocation() {
