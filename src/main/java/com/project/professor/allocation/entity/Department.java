@@ -1,10 +1,16 @@
 package com.project.professor.allocation.entity;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 @Entity
 public class Department {
@@ -16,14 +22,19 @@ public class Department {
 	@Column(nullable = false, length = 50)
 	private String name;
 	
+	@OnDelete(action = OnDeleteAction.CASCADE)
+	@OneToMany(mappedBy = "department")
+	private List<Professor> professors;
+	
 	public Department() {
 		super();
 	}
 	
-	public Department(Long id, String name) {
+	public Department(Long id, String name, List<Professor> professors) {
 		super();
 		this.id = id;
 		this.name = name;
+		this.professors = professors;
 	}
 
 	public Long getId() {
@@ -41,6 +52,13 @@ public class Department {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
+
+	public List<Professor> getProfessors() {
+		return professors;
+	}
+
+	public void setProfessors(List<Professor> professors) {
+		this.professors = professors;
+	}
 	
 }

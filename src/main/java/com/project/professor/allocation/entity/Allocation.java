@@ -10,6 +10,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -31,17 +32,25 @@ public class Allocation {
 	@Temporal(value = TemporalType.TIME)
 	@Column(nullable = false, unique = false)
 	private Date end;
-
+	
+	@ManyToOne(optional = false)
+	private Professor professor;
+	
+	@ManyToOne(optional = false)
+	private Course course;
+	
 	public Allocation() {
 		super();
 	}
 
-	public Allocation(Long id, DayOfWeek dayOfWeek, Date start, Date end) {
+	public Allocation(Long id, DayOfWeek dayOfWeek, Date start, Date end, Professor professor, Course course) {
 		super();
 		this.id = id;
 		this.dayOfWeek = dayOfWeek;
 		this.start = start;
 		this.end = end;
+		this.professor = professor;
+		this.course = course;
 	}
 
 	public Long getId() {
