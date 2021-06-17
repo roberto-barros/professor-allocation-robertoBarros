@@ -12,6 +12,8 @@ import com.project.professor.allocation.entity.Professor;
 @Repository
 public interface AllocationRepository extends JpaRepository<Allocation, Long> {
 	
+	//Custom Queries
+	
 	List<Allocation> findByFkIdLike(Professor id);
 	
 	List<Allocation> findByFkIdLike(Course id);
