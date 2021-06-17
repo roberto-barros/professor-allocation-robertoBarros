@@ -20,7 +20,7 @@ public class Professor {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column(nullable = false, unique = true, length = 11)
+	@Column(nullable = false, unique = true, length = 14)
 	private String cpf;
 	
 	@Column(nullable = false, length = 50)
