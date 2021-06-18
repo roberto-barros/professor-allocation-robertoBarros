@@ -14,9 +14,9 @@ public interface AllocationRepository extends JpaRepository<Allocation, Long> {
 	
 	//Custom Queries
 	
-	List<Allocation> findByFkIdLike(Professor id);
+	List<Allocation> findByIdLike(Professor id);
 	
-	List<Allocation> findByFkIdLike(Course id);
+	List<Allocation> findByIdLike(Course id);
 	
 	//é possível fazer um find por parte do nome do professor em allocation?
 }
