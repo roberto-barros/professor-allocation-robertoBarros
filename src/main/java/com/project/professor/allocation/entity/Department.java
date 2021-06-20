@@ -30,6 +30,11 @@ public class Department {
 		super();
 	}
 	
+	public Department(Long id) {
+		super();
+		this.id = id;
+		
+	}
 	public Department(Long id, String name, List<Professor> professors) {
 		super();
 		this.id = id;
