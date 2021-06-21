@@ -28,7 +28,7 @@ public class ProfessorRepositoryTest {
 	private DepartmentRepository departmentRepository;
 	
 	@Test
-	void testCreate() {
+	public void testCreate() {
 		//From Controller - Arrange
 		/*
 		Department dep = new Department();
@@ -68,26 +68,48 @@ public class ProfessorRepositoryTest {
 	}
 	
 	@Test
-	void testRead1() {
+	public void testRead1() {
 		
 		List<Professor> professors = professorRepository.findAll();
 		
+		System.out.println(professors);
 	}
 	
 	@Test
-	void testRead2() {
+	public void testRead2() {
 		
 		Long id = 7L;
 		
 		Optional<Professor> optional = professorRepository.findById(id);
 		Professor prof = optional.orElse(null);
 		
+		System.out.println(prof);
 	}
 	
 	@Test
-	void testUpdate() {
+	public void testUpdate() {
 		
-		Long id = 7L;
+		//From Controller - Arrange
+		Department dept = new Department(3L);
+		Professor prof = new Professor();
+		prof.setId(1L);
+		prof.setCpf("111.111.222-44");
+		prof.setName("New Professor1");
+		prof.setDepartment(dept);
+		
+		//In Service - Act
+		if(professorRepository.existsById(prof.getId())) {
+			Professor newProf = professorRepository.save(prof);
+			Long departmentId = newProf.getDepartment().getId();
+			
+			Department newDepartment = departmentRepository.findById(departmentId).orElse(null);
+			newProf.setDepartment(newDepartment);
+			
+		//Result
+		System.out.println(newProf);
+		}		
+		
+		/*Long id = 7L;
 		
 		if(professorRepository.existsById(id)) {
 			Optional<Professor> optional = professorRepository.findById(id);
@@ -97,19 +119,23 @@ public class ProfessorRepositoryTest {
 			prof.setCpf("111.111.111-20");
 			
 			professorRepository.save(prof);
-		}
+		}*/
+		
 	}
 	
 	@Test
-	void testDelete1() {
+	public void testDelete1() {
 		
 		Long id = 7L;
 		
-		professorRepository.deleteById(id);
+		if(id != null && professorRepository.existsById(id)) {
+			professorRepository.deleteById(id);
+		}
+		
 	}
 	
 	@Test
-	void testDelete2() {
+	public void testDelete2() {
 		
 		professorRepository.deleteAllInBatch();
 	}
