@@ -48,7 +48,7 @@ public class ProfessorRepositoryTest {
 		*/
 		
 		//From Controller - Arrange
-		Department dept = new Department(3L);
+		Department dept = new Department(3L, null, null);
 		Professor prof = new Professor();
 		prof.setId(null);
 		prof.setCpf("111.111.222-44");
@@ -90,12 +90,8 @@ public class ProfessorRepositoryTest {
 	public void testUpdate() {
 		
 		//From Controller - Arrange
-		Department dept = new Department(3L);
-		Professor prof = new Professor();
-		prof.setId(1L);
-		prof.setCpf("111.111.222-44");
-		prof.setName("New Professor1");
-		prof.setDepartment(dept);
+		Department dept = new Department(3L, null, null);
+		Professor prof = new Professor(7L, "555.555.555-55", "Tal Pessoa", dept, null);
 		
 		//In Service - Act
 		if(professorRepository.existsById(prof.getId())) {
