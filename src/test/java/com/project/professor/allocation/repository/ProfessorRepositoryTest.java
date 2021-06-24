@@ -49,11 +49,7 @@ public class ProfessorRepositoryTest {
 		
 		//From Controller - Arrange
 		Department dept = new Department(3L, null, null);
-		Professor prof = new Professor();
-		prof.setId(null);
-		prof.setCpf("111.111.222-44");
-		prof.setName("New Professor1");
-		prof.setDepartment(dept);
+		Professor prof = new Professor(null, "111.111.222-44", "New Professor1", dept, null);
 		
 		//In Service - Act
 		prof.setId(null);
