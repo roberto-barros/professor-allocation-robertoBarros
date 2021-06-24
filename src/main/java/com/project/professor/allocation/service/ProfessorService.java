@@ -55,11 +55,11 @@ public class ProfessorService {
 	
 	public void deleteById(Long professorId) {
 		if(professorRepository.existsById(professorId)) {
-			departmentService.deleteById(professorId);
+			professorRepository.deleteById(professorId);
 		}
 	}
 	
 	public void deleteAll() {
-		departmentService.deleteAll();
+		professorRepository.deleteAll();
 	}
 }
