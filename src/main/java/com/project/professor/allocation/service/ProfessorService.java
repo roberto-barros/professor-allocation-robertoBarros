@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 
 import com.project.professor.allocation.entity.Department;
 import com.project.professor.allocation.entity.Professor;
-import com.project.professor.allocation.repository.DepartmentRepository;
 import com.project.professor.allocation.repository.ProfessorRepository;
 
 @Service
@@ -14,13 +13,11 @@ public class ProfessorService {
 
 	private final ProfessorRepository professorRepository;
 	private final DepartmentService departmentService;
-	private final DepartmentRepository departmentRepository;
 
-	public ProfessorService(ProfessorRepository professorRepository, DepartmentService departmentService, DepartmentRepository departmentRepository) {
+	public ProfessorService(ProfessorRepository professorRepository, DepartmentService departmentService) {
 		super();
 		this.professorRepository = professorRepository;
 		this.departmentService = departmentService;
-		this.departmentRepository = departmentRepository;
 	}
 	
 	public List<Professor> findAll(){
@@ -50,7 +47,7 @@ public class ProfessorService {
 		Professor newProfessor = professorRepository.save(professor);
 		
 		Long departmentId = newProfessor.getDepartment().getId();
-		Department newDepartment = departmentRepository.findById(departmentId).orElse(null);
+		Department newDepartment = departmentService.findById(departmentId);
 		newProfessor.setDepartment(newDepartment);
 		
 		return newProfessor;
