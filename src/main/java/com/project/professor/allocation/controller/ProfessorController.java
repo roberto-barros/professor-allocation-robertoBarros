@@ -17,6 +17,11 @@ import org.springframework.web.bind.annotation.RestController;
 import com.project.professor.allocation.entity.Professor;
 import com.project.professor.allocation.service.ProfessorService;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+
+@Api(tags = {"CADASTRO PROFESSOR"})
 @RestController
 @RequestMapping(path = "/professors", produces = MediaType.APPLICATION_JSON_VALUE)
 public class ProfessorController {
@@ -52,7 +57,8 @@ public class ProfessorController {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
 	}
-
+	
+	@ApiResponses({@ApiResponse(code = 200, message = "OK"), @ApiResponse(code = 404, message = "NOT FOUND"), @ApiResponse(code = 400, message = "BAD REQUEST")})
 	@PutMapping(path = "/{professorId}")
 	public ResponseEntity<Professor> update(@PathVariable(name = "professorId") Long id, @RequestBody Professor professor) {
 		professor.setId(id);
