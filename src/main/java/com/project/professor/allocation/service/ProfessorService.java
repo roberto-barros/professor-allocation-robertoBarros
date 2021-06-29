@@ -20,9 +20,11 @@ public class ProfessorService {
 		this.departmentService = departmentService;
 	}
 	
-	public List<Professor> findAll(){
-		List<Professor> professors = professorRepository.findAll();
-		return professors;
+	public List<Professor> findAll(String partName){
+		if(partName == null) {
+			return professorRepository.findAll();
+		}
+		return professorRepository.findByNameContainingIgnoreCase(partName);
 	}
 	
 	public Professor findById(Long id) {
