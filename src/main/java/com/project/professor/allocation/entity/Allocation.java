@@ -14,6 +14,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 public class Allocation {
 
@@ -33,9 +35,11 @@ public class Allocation {
 	@Column(nullable = false, unique = false)
 	private Date end;
 	
+	@JsonIgnoreProperties({"allocations"})
 	@ManyToOne(optional = false)
 	private Professor professor;
 	
+	@JsonIgnoreProperties({"allocations"})
 	@ManyToOne(optional = false)
 	private Course course;
 	

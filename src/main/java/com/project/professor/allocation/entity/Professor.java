@@ -13,6 +13,9 @@ import javax.persistence.OneToMany;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+
 @Entity
 public class Professor {
 	
@@ -26,6 +29,7 @@ public class Professor {
 	@Column(nullable = false, length = 50)
 	private String name;
 	
+	@JsonIgnoreProperties({"professors"})
 	@ManyToOne(optional = false)
 	private Department department;
 	
