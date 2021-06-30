@@ -17,9 +17,12 @@ public class DepartmentService {
 		this.departmentRepository = departmentRepository;
 	}
 	
-	public List<Department> findAll() {
-		List<Department> departments = departmentRepository.findAll();
-		return departments;
+	public List<Department> findAll(String partName) {
+		if(partName == null) {
+			return departmentRepository.findAll();
+		}else {
+			return departmentRepository.findByNameContainingIgnoreCase(partName);			
+		}
 	}
 	
 	public Department findById(Long id) {

@@ -17,9 +17,12 @@ public class CourseService {
 		this.courseRepository = courseRepository;
 	}
 	
-	public List<Course> findAll() {
-		List<Course> courses = courseRepository.findAll();
-		return courses;
+	public List<Course> findAll(String partName) {
+		if(partName == null) {
+			return courseRepository.findAll();		
+		}else {
+			return courseRepository.findByNameContainingIgnoreCase(partName);
+		}
 	}
 	
 	public Course findById(Long id) {

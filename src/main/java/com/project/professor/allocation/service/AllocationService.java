@@ -39,6 +39,14 @@ public class AllocationService {
 		return allocationRepository.findByCourseId(courseId);
 	}
 	
+	public List<Allocation> findByProfessorName(String professorName){
+		return allocationRepository.findByProfessorNameContainingIgnoreCase(professorName);
+	}
+	
+	public List<Allocation> findByCourseName(String courseName){
+		return allocationRepository.findByCourseNameContainingIgnoreCase(courseName);
+	}
+	
 	public Allocation create(Allocation allocation) {
 		allocation.setId(null);
 		return saveInternal(allocation);
