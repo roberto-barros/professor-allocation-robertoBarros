@@ -21,7 +21,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
-@Api(tags = {"CADASTRO PROFESSOR"})
+@Api(tags = {"PROFESSOR REGISTER"})
 @RestController
 @RequestMapping(path = "/professors", produces = MediaType.APPLICATION_JSON_VALUE)
 public class ProfessorController {
@@ -29,15 +29,18 @@ public class ProfessorController {
 	private final ProfessorService professorService;
 
 	public ProfessorController(ProfessorService professorService) {
+		super();
 		this.professorService = professorService;
 	}
 
+	@ApiResponse(code = 200, message = "OK")
 	@GetMapping
 	public ResponseEntity<List<Professor>> findAll(@RequestParam(name = "partName", required = false) String partName) {
 		List<Professor> professors = professorService.findAll(partName);
 		return new ResponseEntity<>(professors, HttpStatus.OK);
 	}
-
+	
+	@ApiResponses({@ApiResponse(code = 404, message = "NOT FOUND"), @ApiResponse(code = 200, message = "OK")})
 	@GetMapping(path = "/{professorId}")
 	public ResponseEntity<Professor> findById(@PathVariable(name = "professorId") Long id) {
 		Professor professor = professorService.findById(id);
@@ -47,7 +50,8 @@ public class ProfessorController {
 			return new ResponseEntity<>(professor, HttpStatus.OK);
 		}
 	}
-
+	
+	@ApiResponses({@ApiResponse(code = 201, message = "CREATED"), @ApiResponse(code = 400, message = "BAD REQUEST")})
 	@PostMapping
 	public ResponseEntity<Professor> create(@RequestBody Professor professor) {
 		try {
@@ -74,12 +78,14 @@ public class ProfessorController {
 		}
 	}
 	
+	@ApiResponse(code = 204, message = "DELETED")
 	@DeleteMapping(path = "/{professorId}")
 	public ResponseEntity<Void> deleteById(@PathVariable(name = "professorId") Long id){
 		professorService.deleteById(id);
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 	
+	@ApiResponse(code = 204, message = "ALL DELETED")
 	@DeleteMapping
 	public ResponseEntity<Void> deleteAll() {
 		professorService.deleteAll();
