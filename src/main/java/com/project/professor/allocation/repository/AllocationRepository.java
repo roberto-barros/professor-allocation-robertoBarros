@@ -6,8 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import com.project.professor.allocation.entity.Allocation;
-import com.project.professor.allocation.entity.Course;
-import com.project.professor.allocation.entity.Professor;
 
 @Repository
 public interface AllocationRepository extends JpaRepository<Allocation, Long> {
@@ -18,5 +16,8 @@ public interface AllocationRepository extends JpaRepository<Allocation, Long> {
 	
 	List<Allocation> findByCourseId(Long id);
 	
-	//é possível fazer um find por parte do nome do professor em allocation?
+	List<Allocation> findByProfessorNameContainingIgnoreCase(String professorName);
+	
+	List<Allocation> findByCourseNameContainingIgnoreCase(String courseName);
+
 }
