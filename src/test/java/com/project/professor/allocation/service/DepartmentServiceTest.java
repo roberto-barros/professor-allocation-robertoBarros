@@ -24,7 +24,7 @@ public class DepartmentServiceTest {
 	@Test
 	public void findAllTest() {
 		//In Service
-		List<Department> departments = departmentService.findAll();
+		List<Department> departments = departmentService.findAll(null);
 		
 		//Result
 		System.out.println(departments);

@@ -26,7 +26,7 @@ public class ProfessorServiceTest {
 	@Test
 	public void findAllTest() {
 		//In Service
-		List<Professor> professors = professorService.findAll();
+		List<Professor> professors = professorService.findAll(null);
 		
 		// Result
 		System.out.println(professors);

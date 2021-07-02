@@ -36,7 +36,7 @@ public class CourseServiceTest {
 	@Test
 	public void findAllTest() {
 		//In Service
-		List<Course> courses = courseService.findAll();
+		List<Course> courses = courseService.findAll(null);
 		
 		//Result
 		System.out.println(courses);
