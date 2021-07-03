@@ -50,29 +50,29 @@ public class AllocationController {
 	}
 	
 	@ApiResponse(code = 200, message = "OK")
-	@GetMapping(path = "/professor_id/{professorId}") 
+	@GetMapping(path = "/professor/{professorId}") 
 	public ResponseEntity<List<Allocation>> findByProfessorId(@PathVariable(name = "professorId") Long id) {
 		List<Allocation> allocations = allocationService.findByProfessorId(id);
 		return new ResponseEntity<>(allocations, HttpStatus.OK);
 	}
 
 	@ApiResponse(code = 200, message = "OK")
-	@GetMapping(path = "/professor_name/{professorName}")
+	@GetMapping(path = "/professor")
 	public ResponseEntity<List<Allocation>> findByProfessorName(@RequestParam(name = "professorName") String professorName) {
 		List<Allocation> allocations = allocationService.findByProfessorName(professorName);
 		return new ResponseEntity<>(allocations, HttpStatus.OK);
 	}
 	
 	@ApiResponse(code = 200, message = "OK")
-	@GetMapping(path = "/course_id/{courseId}")
+	@GetMapping(path = "/course/{courseId}")
 	public ResponseEntity<List<Allocation>> findByCourseId(@PathVariable(name = "courseId") Long id) {
 		List<Allocation> allocations = allocationService.findByCourseId(id);
 		return new ResponseEntity<>(allocations, HttpStatus.OK);
 	}
 
 	@ApiResponse(code = 200, message = "OK")
-	@GetMapping(path = "/course_name/{courseName}")
-	public ResponseEntity<List<Allocation>> findByCourseName(@PathVariable(name = "courseName") String courseName) {
+	@GetMapping(path = "/course")
+	public ResponseEntity<List<Allocation>> findByCourseName(@RequestParam(name = "courseName") String courseName) {
 		List<Allocation> allocations = allocationService.findByCourseName(courseName);
 		return new ResponseEntity<>(allocations, HttpStatus.OK);
 	}
