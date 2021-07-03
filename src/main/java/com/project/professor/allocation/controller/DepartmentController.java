@@ -40,8 +40,11 @@ public class DepartmentController {
 		return new ResponseEntity<>(departments, HttpStatus.OK);
 	}
 
-	@ApiResponses({ @ApiResponse(code = 404, message = "NOT FOUND"), @ApiResponse(code = 200, message = "OK")})
-	@GetMapping(path = "/departmentId")
+	@ApiResponses({
+		@ApiResponse(code = 404, message = "NOT FOUND"), 
+		@ApiResponse(code = 200, message = "OK"),
+	})
+	@GetMapping(path = "/{departmentId}")
 	public ResponseEntity<Department> findById(@PathVariable(name = "departmentId") Long id) {
 		Department department = departmentService.findById(id);
 		if (department == null) {
@@ -51,7 +54,10 @@ public class DepartmentController {
 		}
 	}
 
-	@ApiResponses({ @ApiResponse(code = 201, message = "CREATED"), @ApiResponse(code = 400, message = "BAD REQUEST") })
+	@ApiResponses({
+		@ApiResponse(code = 201, message = "CREATED"), 
+		@ApiResponse(code = 400, message = "BAD REQUEST")
+	})
 	@PostMapping
 	public ResponseEntity<Department> create(@RequestBody Department department) {
 		try {
@@ -62,8 +68,12 @@ public class DepartmentController {
 		}
 	}
 
-	@ApiResponses({@ApiResponse(code = 404, message = "NOT FOUND"), @ApiResponse(code = 200, message = "OK"), @ApiResponse(code = 400, message = "BAD REQUEST")})
-	@PostMapping(path = "/departmentId")
+	@ApiResponses({
+		@ApiResponse(code = 404, message = "NOT FOUND"), 
+		@ApiResponse(code = 200, message = "OK"), 
+		@ApiResponse(code = 400, message = "BAD REQUEST")
+	})
+	@PostMapping(path = "/{departmentId}")
 	public ResponseEntity<Department> update(@PathVariable(name = "departmentId") Long id, @RequestBody Department department) {
 		department.setId(id);
 		try {
@@ -79,7 +89,7 @@ public class DepartmentController {
 	}
 	
 	@ApiResponse(code = 204, message = "DELETED")
-	@DeleteMapping(path = "/departmentId")
+	@DeleteMapping(path = "/{departmentId}")
 	public ResponseEntity<Void> deleteById(@PathVariable(name = "departmentId") Long id) {
 		departmentService.deleteById(id);
 		return new ResponseEntity<> (HttpStatus.NO_CONTENT);

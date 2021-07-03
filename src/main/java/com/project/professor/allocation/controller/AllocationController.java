@@ -23,8 +23,6 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
-// Replicar as correções para as outras classes
-
 @Api(tags = "ALLOCATION REGISTER")
 @RestController
 @RequestMapping(path = "/allocations", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -45,56 +43,35 @@ public class AllocationController {
 	}
 
 	@ApiResponse(code = 200, message = "OK")
-	// @GetMapping(path = "/allocationId") // ERRADO (ERRO 1)
 	@GetMapping(path = "/{allocationId}") // CORRETO
-	// Comentário: o nome do parâmetro de caminho de ficar entre chaves {}
 	public ResponseEntity<Allocation> findById(@PathVariable(name = "allocationId") Long id) {
 		Allocation allocation = allocationService.findById(id);
 		return new ResponseEntity<>(allocation, HttpStatus.OK);
 	}
+	
 	@ApiResponse(code = 200, message = "OK")
-	// @GetMapping(path = "/professorId") // ERRADO (ERRO 2)
-	// @GetMapping(path = "/professorId/{professorId}") // CORRETO
-	@GetMapping(path = "/professor/{professorId}") // RECOMENDADO
-	// Comentários:
-	//		- o nome do parâmetro de caminho de ficar entre chaves {}
-	//		- coloquei mais um "/" para poder declarar o parâmetro de query
-	//        cuidado pois as seguintes URLs são igauis:
-	//           http://localhost:8080/allocations/{professorId}
-	//           http://localhost:8080/allocations/{courseId}
-	//              no exemplo acima, só foi modificado o nome do parâmetro de caminho, mas as URLs são iguais
-	//              pense da seguinte forma: o nome dos métodos (/allocations/) são iguais, só o nome dos parâmetros ({professorId} e {courseId}) que mudou
+	@GetMapping(path = "/professor_id/{professorId}") 
 	public ResponseEntity<List<Allocation>> findByProfessorId(@PathVariable(name = "professorId") Long id) {
 		List<Allocation> allocations = allocationService.findByProfessorId(id);
 		return new ResponseEntity<>(allocations, HttpStatus.OK);
 	}
 
-	// Mesma coisa do ERRO 2
 	@ApiResponse(code = 200, message = "OK")
-	@GetMapping(path = "/courseId")
+	@GetMapping(path = "/professor_name/{professorName}")
+	public ResponseEntity<List<Allocation>> findByProfessorName(@RequestParam(name = "professorName") String professorName) {
+		List<Allocation> allocations = allocationService.findByProfessorName(professorName);
+		return new ResponseEntity<>(allocations, HttpStatus.OK);
+	}
+	
+	@ApiResponse(code = 200, message = "OK")
+	@GetMapping(path = "/course_id/{courseId}")
 	public ResponseEntity<List<Allocation>> findByCourseId(@PathVariable(name = "courseId") Long id) {
 		List<Allocation> allocations = allocationService.findByCourseId(id);
 		return new ResponseEntity<>(allocations, HttpStatus.OK);
 	}
 
-//	@ApiResponse(code = 200, message = "OK")
-//	@GetMapping(path = "/professorName")
-//	public ResponseEntity<List<Allocation>> findByProfessorName(@PathVariable(name = "professorName") String professorName) {
-//		List<Allocation> allocations = allocationService.findByProfessorName(professorName);
-//		return new ResponseEntity<>(allocations, HttpStatus.OK);
-//	}
-	
-	// Recomendo trocar por um parâmetro de query.
 	@ApiResponse(code = 200, message = "OK")
-	@GetMapping(path = "/professor")
-	public ResponseEntity<List<Allocation>> findByProfessorName(@RequestParam(name = "professorName") String professorName) {
-		List<Allocation> allocations = allocationService.findByProfessorName(professorName);
-		return new ResponseEntity<>(allocations, HttpStatus.OK);
-	}
-
-	// Aplicar a mesma lógica do método acima.
-	@ApiResponse(code = 200, message = "OK")
-	@GetMapping(path = "/courseName")
+	@GetMapping(path = "/course_name/{courseName}")
 	public ResponseEntity<List<Allocation>> findByCourseName(@PathVariable(name = "courseName") String courseName) {
 		List<Allocation> allocations = allocationService.findByCourseName(courseName);
 		return new ResponseEntity<>(allocations, HttpStatus.OK);
@@ -111,9 +88,8 @@ public class AllocationController {
 		}
 	}
 
-	// Mesma coisa do ERRO 1
 	@ApiResponses({@ApiResponse(code = 404, message = "NOT FOUND"), @ApiResponse(code = 200, message = "OK"), @ApiResponse(code = 400, message = "BAD REQUEST")})
-	@PutMapping(path = "/allocationId")
+	@PutMapping(path = "/{allocationId}")
 	public ResponseEntity<Allocation> update(@PathVariable(name = "allocationId") Long id, @RequestBody Allocation allocation) {
 		allocation.setId(id);
 		try {
@@ -128,9 +104,8 @@ public class AllocationController {
 		}
 	}
 	
-	// Mesma coisa do ERRO 1
 	@ApiResponse(code = 204, message = "DELETED")
-	@DeleteMapping(path = "/allocationId")
+	@DeleteMapping(path = "/{allocationId}")
 	public ResponseEntity<Void> deleteById(@PathVariable(name = "allocationId") Long id) {
 		allocationService.deleteById(id);
 		return new ResponseEntity<> (HttpStatus.NO_CONTENT);

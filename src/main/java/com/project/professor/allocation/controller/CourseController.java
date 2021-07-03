@@ -42,7 +42,7 @@ public class CourseController {
 	}
 
 	@ApiResponses({@ApiResponse(code = 404, message = "NOT FOUND"), @ApiResponse(code = 200, message = "OK")})
-	@GetMapping(path = "/courseId")
+	@GetMapping(path = "/{courseId}")
 	public ResponseEntity<Course> findById(@PathVariable(name = "courseId") Long id) {
 		Course course = courseService.findById(id);
 		if (course == null) {
@@ -63,8 +63,8 @@ public class CourseController {
 		}
 	}
 
-	@ApiResponses({@ApiResponse(code = 404, message = "NOITE FOUND"), @ApiResponse(code = 400, message = "BAD REQUEST"), @ApiResponse(code = 200, message = "OK")})
-	@PutMapping(path = "/courseId")
+	@ApiResponses({@ApiResponse(code = 404, message = "NOT FOUND"), @ApiResponse(code = 400, message = "BAD REQUEST"), @ApiResponse(code = 200, message = "OK")})
+	@PutMapping(path = "/{courseId}")
 	public ResponseEntity<Course> update(@PathVariable(name = "courseId") Long id, @RequestBody Course course) {
 		course.setId(id);
 		try {
@@ -80,7 +80,7 @@ public class CourseController {
 	}
 	
 	@ApiResponse(code = 204, message = "DELETED")
-	@DeleteMapping(path = "/courseId")
+	@DeleteMapping(path = "/{courseId}")
 	public ResponseEntity<Void> deleteById(@PathVariable(name = "courseId") Long id) {
 		courseService.deleteById(id);
 		return new ResponseEntity<> (HttpStatus.NO_CONTENT);
