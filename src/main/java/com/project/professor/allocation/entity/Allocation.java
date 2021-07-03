@@ -14,7 +14,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import io.swagger.annotations.ApiModelProperty;
 
 @Entity
 public class Allocation {
@@ -27,10 +30,14 @@ public class Allocation {
 	@Column(nullable = false, unique = false, length = 50)
 	private DayOfWeek dayOfWeek;
 	
+	@ApiModelProperty(example = "HH:mmZ")
+	@JsonFormat(pattern = "HH:mmZ")
 	@Temporal(value = TemporalType.TIME)
 	@Column(nullable = false, unique = false)
 	private Date start;
 	
+	@ApiModelProperty(example = "HH:mmZ")
+	@JsonFormat(pattern = "HH:mmZ")
 	@Temporal(value = TemporalType.TIME)
 	@Column(nullable = false, unique = false)
 	private Date end;
